@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.measure {
+  max-width: 48rem;
+}
+
+.p-responsive {
+  padding-top: 0rem;
+}
+
+pre {
+  overflow-x: auto;
+}
+
+/** Icons */
+.icon > svg {display: inline-block;width: 16px;height: 16px;vertical-align: middle;}
+.icon > svg path { fill: #828282; }
+
+.social-media-list {list-style: none;margin-left: 0;}
