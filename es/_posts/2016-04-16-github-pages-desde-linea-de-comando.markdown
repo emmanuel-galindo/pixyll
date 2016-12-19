@@ -33,7 +33,7 @@ layout: post
 
 8. En el caso de que agregues un nuevo post desde la interface de tinypress, podes actualizar tu repo local con:
 
-    **Quizas lo mejor sea hacer un backup...**
+    *Quizas lo mejor sea hacer un backup...*
 
     `$ git pull`
 
