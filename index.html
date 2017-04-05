@@ -2,7 +2,6 @@
 layout: default
 ---
 {% assign posts_count = (paginator.posts | size) %}
-
 <div class="home">
   {% if posts_count > 0 %}
     <div class="posts">
@@ -23,6 +22,6 @@ layout: default
 
     {% include pagination.html %}
   {% else %}
-    <h1 class='center'>{{ site.text.index.coming_soon }}</h3>
+    <h1 class='center'>{{ site.text.index.coming_soon }}</h1>
   {% endif %}
 </div>

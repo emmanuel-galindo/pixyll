@@ -14,18 +14,16 @@ title: Code Bites Blog
       <p class="post-summary">
         {% if post.summary %}
           {{ post.summary }}
-        {% else %}
-          {{ post.excerpt }}
         {% endif %}
       </p>
-
+<!--
     <article class="post-content">
          {{ post.excerpt | markdownify }}
     </article>
+-->
   </div>
   {% endfor %}
 </div>
-
 <div class="pagination">
   {% if page.nextUrl %}
     <a class="pagination-item older" href="{{ page.nextUrl | prepend: site.baseurl }}">Older</a>
