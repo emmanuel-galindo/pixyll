@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.site-title { 
+	font-size: 4rem 
+}
+
 .measure {
   max-width: 48rem;
 }
