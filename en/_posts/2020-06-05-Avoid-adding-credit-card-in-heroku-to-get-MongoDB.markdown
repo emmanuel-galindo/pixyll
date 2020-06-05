@@ -55,20 +55,19 @@ mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=m
 
 ### Configuring Heroku to connect to MongoDB
 
-
-#### Note: 
-if you get below output when executing an heroku command:
-```
- ›   Error: Missing required flag:
- ›     -a, --app APP  app to run command against
- ›   See more help with --help
-````
-Execute the command with the app name as part of the heroku command with -a modifier. For example:
-```
-$ heroku apps
-== user@email.com Apps
-radiant-lowlands-14321
-$ heroku ps -a radiant-lowlands-14321  
+> If you get below output when executing an heroku command:
+> ```
+>  ›   Error: Missing required flag:
+>  ›     -a, --app APP  app to run command against
+>  ›   See more help with --help
+> ````
+> Execute the command with the app name as part of the heroku command with -a modifier. For example:
+> ```
+> $ heroku apps
+> == user@email.com Apps
+> radiant-lowlands-14321
+> $ heroku ps -a radiant-lowlands-14321  
+> ```
 
 
 Now the DB is ready to receive connections. Go to your local heroku app folder and generate this config env var:
@@ -76,3 +75,27 @@ Now the DB is ready to receive connections. Go to your local heroku app folder a
 ```shell
 $ heroku config:set MONGODB_URI=mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=majority
 ```
+
+If you need a simple unit test, use this server.js:
+```javascript
+const db = process.env.MONGODB_URI;
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(db, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    });
+    console.log("MongoDB is Connected...");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+```
+
+Commit and push it as usual and in the logs of the app should read:
+```
+2020-06-05T00:10:30.017396+00:00 app[web.1]: Database connection ready
+```
+
