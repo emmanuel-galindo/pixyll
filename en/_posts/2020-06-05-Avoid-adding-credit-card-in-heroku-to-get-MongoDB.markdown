@@ -73,7 +73,7 @@ mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=m
 Now the DB is ready to receive connections. Go to your local heroku app folder and generate this config env var:
 
 ```shell
-$ heroku config:set MONGODB_URI=mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=majority
+$ heroku config:set MONGODB_URI="mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=majority"
 ```
 
 If you need a simple unit test, use this server.js:
