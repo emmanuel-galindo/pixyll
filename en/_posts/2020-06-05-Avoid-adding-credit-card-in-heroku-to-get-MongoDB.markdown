@@ -34,7 +34,8 @@ Luckily, MongoDB has Atlas offering a free tier as well and we could connect to 
 3) Select the region to deploy the cluster. It might be a good idea to have in consideration the region your heroku is running to match it.
 4) MongoDB will take several minutos to provision the cluster
 5) Once provisioned it will look like below, and click Connect:
-![](2020-06-05-15-19-48.png)
+![mongodb.png](/images/mongodb.png)
+
 5) On whitelist, it asks for the IP ranges to allow connectivity from the remote client, in this case Heroku. Not sure if Heroku publish this, but you could select 0.0.0.0/0. This will enable connectivity from any source.
 6) For the user, fill your desired username and password
 7) Move to the next page by clicking "Choose a connection method" 
