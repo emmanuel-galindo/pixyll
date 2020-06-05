@@ -1,0 +1,76 @@
+---
+published: true
+title: Avoid adding credit card in heroku to get MongoDB
+layout: post
+description: Heroku will request your credit card when trying to spin up a MongoDB instance, but you can still connect to MongoDB own cloud Atlas, using their free tier
+---
+
+
+## Connecting MongoDB from Heroku free tier
+
+Heroku out of the box provide a simple way to spin MongoDB instances, and automatically configures it to your running application:
+
+``` shell
+$ heroku addons:create mongolab
+```
+
+A good tutorial on this topic is [https://devcenter.heroku.com/articles/mean-apps-restful-api#provision-a-mongodb-database](https://devcenter.heroku.com/articles/mean-apps-restful-api#provision-a-mongodb-database)
+
+However, when running the command in the free tier, it will ask you validate a credit card in their site to verify your account:
+
+``` shell
+$ heroku addons:create mongolab
+Creating mongolab on ⬢ radiant-lowlands-14472... !
+ ▸    Please verify your account to install this add-on plan (please enter a credit card) For more information, see https://devcenter.heroku.com/categories/billing Verify now
+ ▸    at https://heroku.com/verify
+``` 
+
+### Configuring MongoDB
+
+Luckily, MongoDB has Atlas offering a free tier as well and we could connect to it from Heroku following these steps:
+
+1) Register into MongoDB site
+2) Select Shared Cluster offering for the free tier
+3) Select the region to deploy the cluster. It might be a good idea to have in consideration the region your heroku is running to match it.
+4) MongoDB will take several minutos to provision the cluster
+5) Once provisioned it will look like below, and click Connect:
+![](2020-06-05-15-19-48.png)
+5) On whitelist, it asks for the IP ranges to allow connectivity from the remote client, in this case Heroku. Not sure if Heroku publish this, but you could select 0.0.0.0/0. This will enable connectivity from any source.
+6) For the user, fill your desired username and password
+7) Move to the next page by clicking "Choose a connection method" 
+8) Select "Connect your application"
+9) Copy the URL and Close the dialog
+
+You'll have something like
+```
+mongodb+srv://user:<password>@cluster0-cmmbk.mongodb.net/<dbname>?retryWrites=true&w=majority
+```
+
+Replace password, and dbname use "test":
+```
+mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=majority
+```
+
+### Configuring Heroku to connect to MongoDB
+
+
+#### Note: 
+if you get below output when executing an heroku command:
+```
+ ›   Error: Missing required flag:
+ ›     -a, --app APP  app to run command against
+ ›   See more help with --help
+````
+Execute the command with the app name as part of the heroku command with -a modifier. For example:
+```
+$ heroku apps
+== user@email.com Apps
+radiant-lowlands-14321
+$ heroku ps -a radiant-lowlands-14321  
+
+
+Now the DB is ready to receive connections. Go to your local heroku app folder and generate this config env var:
+
+```shell
+$ heroku config:set MONGODB_URI=mongodb+srv://user:password@cluster0-cmmbk.mongodb.net/test?retryWrites=true&w=majority
+```
