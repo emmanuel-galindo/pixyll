@@ -93,6 +93,8 @@ drwxr-xr-x 5 root root     1024 Apr  5 15:26 grub
 
 ## Mount broken system (via chroot) ##
 Mounting another system via chroot is the usual procedure to recover broken system's. Once the chroot comand is issues, Debian Live will treat the broken system's "/" (root) as its own. Commands run in a chroot environment will affect the broken systems filesystems and not those of the Debian Live.
+
+
 1. Mount root partition (for example an lvm)
 
 ``` shell
@@ -119,6 +121,19 @@ Mounting another system via chroot is the usual procedure to recover broken syst
 # chroot /mnt
 ```
 **Important:** From now on your changes will affect your normal system.
+<br/><br/>
+
+>
+> ### Note for Raspberry Pi OS (previously called Raspbian)
+> ***Nathan sent below comment from his experience running these notes, thanks!***
+> 
+> For Raspbian LVM (Logical Volumes) are not used. There is no need to create directories for mounting a standard install. Once the partition called Linux Filesystem is mounted in /mnt, you have the /boot/efi folders, but efi is more like a placeholder where the EFI volume is mounted. Thus:
+> 
+> ```
+> # sudo mount /dev/mmcblk0p# /mnt     (# = partition number with Linux filesystem)
+> # sudo mount /dev/mmcblk0p# /mnt/boot/efi     (# = partition number with EFI System)
+> ```
+> 
 
 ## Reinstall grub-efi ##
 Download and Install grub-efi package, set the debian bootloader and create a grub config file based on your disk partitioning schema
