@@ -10,14 +10,14 @@ Confluent has created a JMS Client for that comes handy when working with legacy
 [kafka-jms-client] <--- kafka protocol ---> [kafka broker]
 ``` 
 
-It is important to note that compatibility with JMS 1.1 is pretty good but not complete. Preferably, read [https://docs.confluent.io/current/clients/kafka-jms-client/].
+It is important to note that compatibility with JMS 1.1 is pretty good but not complete. Preferably, read [https://docs.confluent.io/current/clients/kafka-jms-client/](https://docs.confluent.io/current/clients/kafka-jms-client/).
 
 
-We are going to configure and run it against Confluent's Cloud. The code can be downloaded at: [https://github.com/emmanuel-galindo/kafka-jms-client]
+We are going to configure and run it against Confluent's Cloud. The code can be downloaded at: [https://github.com/emmanuel-galindo/kafka-jms-client](https://github.com/emmanuel-galindo/kafka-jms-client])
 
 As part of this exercise, we are going to create a producer that will create one message, and a consumer that if it is the first (from the consumer group) will download all message in the topic, if not will just use whatever offset the broker has. These clients are meant to be as much JMS compliant as possible, thus no use of specific logic, and the idea was to keep it simple. 
 
-As a side note, I've found this exercise useful before jumping into trying to make legacy systems JMS implementation connect and interact with a topic in Confluent's Cloud. In addition to the challenge of configuring the JMS service in the legacy system, as Kafka basically works on Layer 4 ([https://en.wikipedia.org/wiki/OSI_model]), you could expect your company's proxy, firewall, vpn, etc to give you some trouble and executing this exercise could help you identifying what are the constraints in your network. 
+As a side note, I've found this exercise useful before jumping into trying to make legacy systems JMS implementation connect and interact with a topic in Confluent's Cloud. In addition to the challenge of configuring the JMS service in the legacy system, as Kafka basically works on Layer 4 ([https://en.wikipedia.org/wiki/OSI_model](https://en.wikipedia.org/wiki/OSI_model])), you could expect your company's proxy, firewall, vpn, etc to give you some trouble and executing this exercise could help you identifying what are the constraints in your network. 
 
 ## Requirements
 
@@ -28,9 +28,9 @@ You'll need to create a new topic (we are using TestTopic as name) and get some 
         - In Clients tab, at Java section, copy the properties
         - In Confluent Platform Components, at Schema Registry, create a new API Key and Secret
 
-Then, you'll need to compile Confluent's Kafka JMS Client following [https://docs.confluent.io/current/clients/kafka-jms-client/installation.html#appendix-1-creating-a-shaded-fat-jar]. As it is mentioned there, to avoid namespace conflicts, it adds the confluent.shaded. preffix. We'll see this when configuring the login class.
+Then, you'll need to compile Confluent's Kafka JMS Client following [https://docs.confluent.io/current/clients/kafka-jms-client/installation.html#appendix-1-creating-a-shaded-fat-jar](https://docs.confluent.io/current/clients/kafka-jms-client/installation.html#appendix-1-creating-a-shaded-fat-jar]). As it is mentioned there, to avoid namespace conflicts, it adds the confluent.shaded. preffix. We'll see this when configuring the login class.
 
-After that, go ahead and grab a jar for the JMS 1.1. I'd normally refer to Maven central, but it looks there's some legal battle around this. I've found [https://repository.jboss.org/maven2/javax/jms/jms/1.1/] to have a working copy. 
+After that, go ahead and grab a jar for the JMS 1.1. I'd normally refer to Maven central, but it looks there's some legal battle around this. I've found [https://repository.jboss.org/maven2/javax/jms/jms/1.1/](https://repository.jboss.org/maven2/javax/jms/jms/1.1/]) to have a working copy. 
 
 ## Installation
 
