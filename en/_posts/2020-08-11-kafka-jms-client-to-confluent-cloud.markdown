@@ -5,8 +5,6 @@ layout: post
 description: Example how to use Confluent's JMS Client Kafka library to connect from legacy systems
 ---
 
-# Kafka JMS Client to Confluent Cloud example
-
 Confluent has created a JMS Client for that comes handy when working with legacy systems. Notably, it wraps a JMS 1.1 implementation and data flow goes like this:
 ```
 [kafka-jms-client] <--- kafka protocol ---> [kafka broker]
@@ -19,7 +17,7 @@ We are going to configure and run it against Confluent's Cloud. The code can be 
 
 As part of this exercise, we are going to create a producer that will create one message, and a consumer that if it is the first (from the consumer group) will download all message in the topic, if not will just use whatever offset the broker has. These clients are meant to be as much JMS compliant as possible, thus no use of specific logic, and the idea was to keep it simple. 
 
-As a side note, I've found this exercise useful before jumping into trying to make legacy systems JMS implementation to effectively connect and interact with a topic in Confluent's Cloud. In addition to configuring the service, as Kafka basically works on Layer 4 (https://en.wikipedia.org/wiki/OSI_model), you could expect your company's proxy, firewall, vpn, etc to give you some trouble and executing this exercise could help you . 
+As a side note, I've found this exercise useful before jumping into trying to make legacy systems JMS implementation connect and interact with a topic in Confluent's Cloud. In addition to the challenge of configuring the JMS service in the legacy system, as Kafka basically works on Layer 4 (https://en.wikipedia.org/wiki/OSI_model), you could expect your company's proxy, firewall, vpn, etc to give you some trouble and executing this exercise could help you identifying what are the constraints in your network. 
 
 ## Requirements
 
@@ -40,7 +38,7 @@ Create a new working dir, or clone the repo above, and create a new lib/ folder.
 
 ### Producer
 
-Create a Producer.java file and copy below code in it. As you can see, it is a pretty standard JMS implementation. I am importing here using wildcard to avoid unnecesary lenght.
+Create a Producer.java file and copy below code in it. As you can see, it is a pretty standard JMS implementation. I am importing here using wildcard to make it short.
 
 ```java
 import javax.jmx.*;
@@ -61,6 +59,8 @@ public class Producer {
     }
 }
 ```
+
+<BR/>
 
 ### Consumer
 In this case, a Consumer.java needs to be created with this content.
@@ -85,6 +85,8 @@ public class Consumer {
     }
 }
 ```
+
+<BR/>
 
 ### jndi.properties 
 Create a new file jndi.properties at the same folder as the consumer and producer. Here is where the specifics for Kafka and Confluent Cloud are set:
